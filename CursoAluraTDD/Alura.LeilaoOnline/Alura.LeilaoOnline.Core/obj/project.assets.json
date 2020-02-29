@@ -186,11 +186,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Estudo\\TDD\\Alura.LeilaoOnline\\Alura.LeilaoOnline.Core\\Alura.LeilaoOnline.Core.csproj",
+      "projectUniqueName": "D:\\Estudo\\Estudo.UnitTest\\CursoAluraTDD\\Alura.LeilaoOnline\\Alura.LeilaoOnline.Core\\Alura.LeilaoOnline.Core.csproj",
       "projectName": "Alura.LeilaoOnline.Core",
-      "projectPath": "D:\\Estudo\\TDD\\Alura.LeilaoOnline\\Alura.LeilaoOnline.Core\\Alura.LeilaoOnline.Core.csproj",
+      "projectPath": "D:\\Estudo\\Estudo.UnitTest\\CursoAluraTDD\\Alura.LeilaoOnline\\Alura.LeilaoOnline.Core\\Alura.LeilaoOnline.Core.csproj",
       "packagesPath": "C:\\Users\\emill\\.nuget\\packages\\",
-      "outputPath": "D:\\Estudo\\TDD\\Alura.LeilaoOnline\\Alura.LeilaoOnline.Core\\obj\\",
+      "outputPath": "D:\\Estudo\\Estudo.UnitTest\\CursoAluraTDD\\Alura.LeilaoOnline\\Alura.LeilaoOnline.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
