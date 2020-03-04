@@ -6,6 +6,20 @@ namespace Alura.LeilaoOnline.Tests
     public class LeilaoTests
     {
         [Fact]
+        public void LeilaoSemLances()
+        {
+            //Arrange
+            var leilao = new Leilao("peca leiloada");
+
+            //Act
+            leilao.TerminaPregao();
+
+            //Assert
+            var valorObtido = leilao.Ganhador.Valor;
+            Assert.Equal(0, valorObtido);
+        }
+
+        [Fact]
         public void LeilaoComApenasUmLance()
         {
             //Arrange
