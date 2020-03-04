@@ -1,0 +1,8 @@
+D:\Estudo\Estudo.UnitTest\CursoAluraTDD\Alura.LeilaoOnline\Alura.LeilaoOnline.Core\bin\Debug\netstandard2.0\Alura.LeilaoOnline.Core.deps.json
+D:\Estudo\Estudo.UnitTest\CursoAluraTDD\Alura.LeilaoOnline\Alura.LeilaoOnline.Core\bin\Debug\netstandard2.0\Alura.LeilaoOnline.Core.dll
+D:\Estudo\Estudo.UnitTest\CursoAluraTDD\Alura.LeilaoOnline\Alura.LeilaoOnline.Core\bin\Debug\netstandard2.0\Alura.LeilaoOnline.Core.pdb
+D:\Estudo\Estudo.UnitTest\CursoAluraTDD\Alura.LeilaoOnline\Alura.LeilaoOnline.Core\obj\Debug\netstandard2.0\Alura.LeilaoOnline.Core.csprojAssemblyReference.cache
+D:\Estudo\Estudo.UnitTest\CursoAluraTDD\Alura.LeilaoOnline\Alura.LeilaoOnline.Core\obj\Debug\netstandard2.0\Alura.LeilaoOnline.Core.AssemblyInfoInputs.cache
+D:\Estudo\Estudo.UnitTest\CursoAluraTDD\Alura.LeilaoOnline\Alura.LeilaoOnline.Core\obj\Debug\netstandard2.0\Alura.LeilaoOnline.Core.AssemblyInfo.cs
+D:\Estudo\Estudo.UnitTest\CursoAluraTDD\Alura.LeilaoOnline\Alura.LeilaoOnline.Core\obj\Debug\netstandard2.0\Alura.LeilaoOnline.Core.dll
+D:\Estudo\Estudo.UnitTest\CursoAluraTDD\Alura.LeilaoOnline\Alura.LeilaoOnline.Core\obj\Debug\netstandard2.0\Alura.LeilaoOnline.Core.pdb

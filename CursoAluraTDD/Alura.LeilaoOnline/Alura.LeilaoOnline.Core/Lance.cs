@@ -4,7 +4,15 @@ using System.Text;
 
 namespace Alura.LeilaoOnline.Core
 {
-    class Lance
+    public class Lance
     {
+        public Interessada Cliente { get; }
+        public double Valor { get; }
+
+        public Lance(Interessada cliente, double valor)
+        {
+            Cliente = cliente;
+            Valor = valor;
+        }
     }
 }
