@@ -3,10 +3,10 @@ using Xunit;
 
 namespace Alura.LeilaoOnline.Tests
 {
-    public class LeilaoTests
+    public class LeilaoTerminaPregaoTests
     {
         [Fact]
-        public void LeilaoSemLances()
+        public void RetornaZeroDadoLeilaoSemLances()
         {
             //Arrange
             var leilao = new Leilao("peca leiloada");
@@ -23,16 +23,16 @@ namespace Alura.LeilaoOnline.Tests
         [InlineData(1200, new double[] { 1200 })]
         [InlineData(400, new double[] { 100, 200, 300, 400 })]
         [InlineData(400, new double[] { 100, 200, 400, 399.99 })]
-        public void LeilaoComVariosLances(double valorEsperado, double[] valoresLance)
+        public void RetornaMaiorValorDadoLeilaoComPeloMenosUmLance(double valorEsperado, double[] lances)
         {
             //Arrange
             var leilao = new Leilao("peca leiloada");
 
-            var pessoaInteressada = new Interessada("cliente interessado", leilao);
+            var clienteInteressado = new Interessada("cliente interessado", leilao);
 
-            foreach(var valor in valoresLance)
+            foreach (var valor in lances)
             {
-                leilao.RecebeLance(pessoaInteressada, valor);
+                leilao.RecebeLance(clienteInteressado, valor);
             }
             
             //Act
@@ -45,20 +45,20 @@ namespace Alura.LeilaoOnline.Tests
         
         [Theory]
         [InlineData(1400)]
-        public void LeilaoCom3Clientes(double valorEsperado)
+        public void RetornaMaiorValorDadoLeilaoComPeloMenosUmLanceE3Clientes(double valorEsperado)
         {
             //Arrange
             var leilao = new Leilao("peca leiloada");
 
-            var pessoaInteressada1 = new Interessada("cliente interessado 1", leilao);
-            var pessoaInteressada2 = new Interessada("cliente interessado 2", leilao);
-            var pessoaInteressada3 = new Interessada("cliente interessado 3", leilao);
+            var clienteInteressado1 = new Interessada("cliente interessado 1", leilao);
+            var clienteInteressado2 = new Interessada("cliente interessado 2", leilao);
+            var clienteInteressado3 = new Interessada("cliente interessado 3", leilao);
 
-            leilao.RecebeLance(pessoaInteressada3, 1400);
-            leilao.RecebeLance(pessoaInteressada1, 100);
-            leilao.RecebeLance(pessoaInteressada2, 200);
-            leilao.RecebeLance(pessoaInteressada1, 1000);
-            leilao.RecebeLance(pessoaInteressada2, 950);
+            leilao.RecebeLance(clienteInteressado3, 1400);
+            leilao.RecebeLance(clienteInteressado1, 100);
+            leilao.RecebeLance(clienteInteressado2, 200);
+            leilao.RecebeLance(clienteInteressado1, 1000);
+            leilao.RecebeLance(clienteInteressado2, 950);
 
             //Act
             leilao.TerminaPregao();
@@ -66,7 +66,7 @@ namespace Alura.LeilaoOnline.Tests
             //Assert
             var valorObtido = leilao.Ganhador.Valor;
             Assert.Equal(valorEsperado, valorObtido);
-            Assert.Equal(pessoaInteressada3, leilao.Ganhador.Cliente);
+            Assert.Equal(clienteInteressado3, leilao.Ganhador.Cliente);
         }
     }
 }
