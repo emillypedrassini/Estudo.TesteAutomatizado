@@ -19,80 +19,40 @@ namespace Alura.LeilaoOnline.Tests
             Assert.Equal(0, valorObtido);
         }
 
-        [Fact]
-        public void LeilaoComApenasUmLance()
+        [Theory]
+        [InlineData(1200, new double[] { 1200 })]
+        [InlineData(400, new double[] { 100, 200, 300, 400 })]
+        [InlineData(400, new double[] { 100, 200, 400, 399.99 })]
+        public void LeilaoComVariosLances(double valorEsperado, double[] valoresLance)
         {
             //Arrange
             var leilao = new Leilao("peca leiloada");
 
-            var pessoaInteressada = new Interessada("cliente 1", leilao);
+            var pessoaInteressada = new Interessada("cliente interessado", leilao);
 
-            leilao.RecebeLance(pessoaInteressada, 1000);
-
+            foreach(var valor in valoresLance)
+            {
+                leilao.RecebeLance(pessoaInteressada, valor);
+            }
+            
             //Act
             leilao.TerminaPregao();
 
             //Assert
-            var valorEsperado = 1000;
             var valorObtido = leilao.Ganhador.Valor;
             Assert.Equal(valorEsperado, valorObtido);
         }
-
-        [Fact]
-        public void LeilaoComVariosLances()
+        
+        [Theory]
+        [InlineData(1400)]
+        public void LeilaoCom3Clientes(double valorEsperado)
         {
             //Arrange
             var leilao = new Leilao("peca leiloada");
 
-            var pessoaInteressada1 = new Interessada("cliente 1", leilao);
-            var pessoaInteressada2 = new Interessada("cliente 2", leilao);
-
-            leilao.RecebeLance(pessoaInteressada1, 100);
-            leilao.RecebeLance(pessoaInteressada2, 200);
-            leilao.RecebeLance(pessoaInteressada1, 1000);
-            leilao.RecebeLance(pessoaInteressada2, 950);
-
-            //Act
-            leilao.TerminaPregao();
-
-            //Assert
-            var valorEsperado = 1000;
-            var valorObtido = leilao.Ganhador.Valor;
-            Assert.Equal(valorEsperado, valorObtido);
-        }
-
-        [Fact]
-        public void LeilaoComLancesOrdenados()
-        {
-            //Arrange
-            var leilao = new Leilao("peca leiloada");
-
-            var pessoaInteressada1 = new Interessada("cliente 1", leilao);
-            var pessoaInteressada2 = new Interessada("cliente 2", leilao);
-
-            leilao.RecebeLance(pessoaInteressada1, 100);
-            leilao.RecebeLance(pessoaInteressada2, 200);
-            leilao.RecebeLance(pessoaInteressada2, 950);
-            leilao.RecebeLance(pessoaInteressada1, 1000);
-
-            //Act
-            leilao.TerminaPregao();
-
-            //Assert
-            var valorEsperado = 1000;
-            var valorObtido = leilao.Ganhador.Valor;
-            Assert.Equal(valorEsperado, valorObtido);
-        }
-
-        [Fact]
-        public void LeilaoCom3Clientes()
-        {
-            //Arrange
-            var leilao = new Leilao("peca leiloada");
-
-            var pessoaInteressada1 = new Interessada("cliente 1", leilao);
-            var pessoaInteressada2 = new Interessada("cliente 2", leilao);
-            var pessoaInteressada3 = new Interessada("cliente 3", leilao);
+            var pessoaInteressada1 = new Interessada("cliente interessado 1", leilao);
+            var pessoaInteressada2 = new Interessada("cliente interessado 2", leilao);
+            var pessoaInteressada3 = new Interessada("cliente interessado 3", leilao);
 
             leilao.RecebeLance(pessoaInteressada3, 1400);
             leilao.RecebeLance(pessoaInteressada1, 100);
@@ -104,7 +64,6 @@ namespace Alura.LeilaoOnline.Tests
             leilao.TerminaPregao();
 
             //Assert
-            var valorEsperado = 1400;
             var valorObtido = leilao.Ganhador.Valor;
             Assert.Equal(valorEsperado, valorObtido);
             Assert.Equal(pessoaInteressada3, leilao.Ganhador.Cliente);
