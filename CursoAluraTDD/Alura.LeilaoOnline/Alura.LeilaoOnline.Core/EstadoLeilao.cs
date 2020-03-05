@@ -2,6 +2,7 @@
 {
     public enum EstadoLeilao
     {
+        AntesDoPregao,
         EmAndamento,
         Finalizado
     }

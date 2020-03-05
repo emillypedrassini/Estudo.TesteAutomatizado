@@ -30,6 +30,8 @@ namespace Alura.LeilaoOnline.Tests
 
             var clienteInteressado = new Interessada("cliente interessado", leilao);
 
+            leilao.IniciaPregao();
+
             foreach (var valor in lances)
             {
                 leilao.RecebeLance(clienteInteressado, valor);
@@ -53,6 +55,8 @@ namespace Alura.LeilaoOnline.Tests
             var clienteInteressado1 = new Interessada("cliente interessado 1", leilao);
             var clienteInteressado2 = new Interessada("cliente interessado 2", leilao);
             var clienteInteressado3 = new Interessada("cliente interessado 3", leilao);
+
+            leilao.IniciaPregao();
 
             leilao.RecebeLance(clienteInteressado3, 1400);
             leilao.RecebeLance(clienteInteressado1, 100);
