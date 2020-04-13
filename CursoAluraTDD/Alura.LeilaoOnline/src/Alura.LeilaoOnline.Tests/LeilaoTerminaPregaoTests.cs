@@ -1,4 +1,5 @@
 ﻿using Alura.LeilaoOnline.Core;
+using Alura.LeilaoOnline.Core.Entities;
 using Xunit;
 
 namespace Alura.LeilaoOnline.Tests

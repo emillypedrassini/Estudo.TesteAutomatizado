@@ -1,4 +1,4 @@
-﻿namespace Alura.LeilaoOnline.Core
+﻿namespace Alura.LeilaoOnline.Core.Enum
 {
     public enum EstadoLeilao
     {
