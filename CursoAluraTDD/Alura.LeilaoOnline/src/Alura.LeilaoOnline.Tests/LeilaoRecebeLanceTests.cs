@@ -1,4 +1,5 @@
 ﻿using Alura.LeilaoOnline.Core;
+using Alura.LeilaoOnline.Core.Entities;
 using System.Linq;
 using Xunit;
 
@@ -6,6 +7,26 @@ namespace Alura.LeilaoOnline.Tests
 {
     public class LeilaoRecebeLanceTests
     {
+        [Fact]
+        public void NaoAceitaProximoLanceDadoSejaDoMesmoInteressado()
+        {
+            //Arrange
+            var leilao = new Leilao("peça leiloada");
+            var interessado = new Interessada("pessoa interessada 1", leilao);
+
+            leilao.IniciaPregao();
+
+            leilao.RecebeLance(interessado, 100);
+
+            //Act
+            leilao.RecebeLance(interessado, 100);
+
+            //Assert
+            var esperado = 1;
+            var resultado = leilao.Lances.Count();
+            Assert.Equal(esperado, resultado);
+        }
+
         [Theory]
         [InlineData(1, new double[] { 100 })]
         [InlineData(2, new double[] { 100, 200 })]
@@ -13,9 +34,9 @@ namespace Alura.LeilaoOnline.Tests
         public void NaoPermiteNovosLancesDadoLeilaoFinalizado(double valorEsperado, double[] lances)
         {
             //Arrange
-            var leilao = new Leilao("peca leiloada");
+            var leilao = new Leilao("peça leiloada");
 
-            var clienteInteressado = new Interessada("cliente interessado", leilao);
+            var clienteInteressado = new Interessada("pessoa interessada 1", leilao);
 
             leilao.IniciaPregao();
             
@@ -39,12 +60,12 @@ namespace Alura.LeilaoOnline.Tests
         [InlineData(new double[] { 200 })]
         [InlineData(new double[] { 200, 300, 400 })]
         [InlineData(new double[] { 200, 300, 400, 500, 600, 700 })]
-        public void QtdePermaneceZeroDadoQuePregaoNaoFoiIniciado(double[] lances)
+        public void QuantidadeDeLancesPermaneceZeroDadoQuePregaoNaoFoiIniciado(double[] lances)
         {
             //Arrange
             var leilao = new Leilao("peça leiloada");
 
-            var clienteInteressado = new Interessada("cliente interessado", leilao);
+            var clienteInteressado = new Interessada("pessoa interessada 1", leilao);
 
             //Act
             foreach (var valor in lances)
