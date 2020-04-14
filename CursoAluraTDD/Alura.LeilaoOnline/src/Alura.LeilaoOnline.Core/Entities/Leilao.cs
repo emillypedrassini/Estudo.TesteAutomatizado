@@ -22,24 +22,21 @@ namespace Alura.LeilaoOnline.Core.Entities
             Estado = EstadoLeilao.AntesDoPregao;
         }
 
-        public void RecebeLance(Interessada cliente, double valor)
+        public void ReceberLance(Interessada cliente, double valor)
         {
-            if(Estado == EstadoLeilao.EmAndamento)
+            if (LanceValido(cliente))
             {
-                if(cliente != _ultimoCliente)
-                {
-                    _lances.Add(new Lance(cliente, valor));
-                    _ultimoCliente = cliente;
-                }
+                _lances.Add(new Lance(cliente, valor));
+                _ultimoCliente = cliente;
             }
         }
 
-        public void IniciaPregao()
+        public void IniciarPregao()
         {
             Estado = EstadoLeilao.EmAndamento;
         }
 
-        public void TerminaPregao()
+        public void TerminarPregao()
         {
             Ganhador = Lances
                 .DefaultIfEmpty(new Lance(null, 0))
@@ -47,6 +44,12 @@ namespace Alura.LeilaoOnline.Core.Entities
                 .LastOrDefault();
 
             Estado = EstadoLeilao.Finalizado;
+        }
+    
+        private bool LanceValido(Interessada cliente)
+        {
+            return (Estado == EstadoLeilao.EmAndamento)
+                    && (cliente != _ultimoCliente);
         }
     }
 }

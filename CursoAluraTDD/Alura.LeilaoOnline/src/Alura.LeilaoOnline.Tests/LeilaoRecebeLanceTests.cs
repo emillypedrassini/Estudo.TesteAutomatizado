@@ -14,12 +14,12 @@ namespace Alura.LeilaoOnline.Tests
             var leilao = new Leilao("peça leiloada");
             var interessado = new Interessada("pessoa interessada 1", leilao);
 
-            leilao.IniciaPregao();
+            leilao.IniciarPregao();
 
-            leilao.RecebeLance(interessado, 100);
+            leilao.ReceberLance(interessado, 100);
 
             //Act
-            leilao.RecebeLance(interessado, 100);
+            leilao.ReceberLance(interessado, 100);
 
             //Assert
             var esperado = 1;
@@ -36,15 +36,15 @@ namespace Alura.LeilaoOnline.Tests
             var clienteInteressado1 = new Interessada("pessoa interessada 1", leilao);
             var clienteInteressado2 = new Interessada("pessoa interessada 2", leilao);
 
-            leilao.IniciaPregao();
+            leilao.IniciarPregao();
 
-            leilao.RecebeLance(clienteInteressado1, 100);
-            leilao.RecebeLance(clienteInteressado2, 200);
+            leilao.ReceberLance(clienteInteressado1, 100);
+            leilao.ReceberLance(clienteInteressado2, 200);
 
-            leilao.TerminaPregao();
+            leilao.TerminarPregao();
 
             //Act
-            leilao.RecebeLance(clienteInteressado1, 300);
+            leilao.ReceberLance(clienteInteressado1, 300);
 
             //Assert
             var valorObtido = leilao.Lances.Count();
@@ -70,9 +70,9 @@ namespace Alura.LeilaoOnline.Tests
                 var valor = lances[i];
 
                 if (i % 2 == 0)
-                    leilao.RecebeLance(clienteInteressado1, valor);
+                    leilao.ReceberLance(clienteInteressado1, valor);
 
-                leilao.RecebeLance(clienteInteressado2, valor);
+                leilao.ReceberLance(clienteInteressado2, valor);
             }
 
             //Assert

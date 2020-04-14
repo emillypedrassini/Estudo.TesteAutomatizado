@@ -13,7 +13,7 @@ namespace Alura.LeilaoOnline.Tests
             var leilao = new Leilao("peca leiloada");
 
             //Act
-            leilao.TerminaPregao();
+            leilao.TerminarPregao();
 
             //Assert
             var valorObtido = leilao.Ganhador.Valor;
@@ -32,22 +32,22 @@ namespace Alura.LeilaoOnline.Tests
             var clienteInteressado1 = new Interessada("cliente 1", leilao);
             var clienteInteressado2 = new Interessada("cliente 2", leilao);
 
-            leilao.IniciaPregao();
+            leilao.IniciarPregao();
 
             for (int i =0; i < lances.Length; i++)
             {
                 if(i%2 == 0)
                 {
-                    leilao.RecebeLance(clienteInteressado1, lances[i]);
+                    leilao.ReceberLance(clienteInteressado1, lances[i]);
                 }
                 else
                 {
-                    leilao.RecebeLance(clienteInteressado2, lances[i]);
+                    leilao.ReceberLance(clienteInteressado2, lances[i]);
                 }
             }
             
             //Act
-            leilao.TerminaPregao();
+            leilao.TerminarPregao();
 
             //Assert
             var valorObtido = leilao.Ganhador.Valor;
@@ -65,16 +65,16 @@ namespace Alura.LeilaoOnline.Tests
             var clienteInteressado2 = new Interessada("cliente interessado 2", leilao);
             var clienteInteressado3 = new Interessada("cliente interessado 3", leilao);
 
-            leilao.IniciaPregao();
+            leilao.IniciarPregao();
 
-            leilao.RecebeLance(clienteInteressado3, 1400);
-            leilao.RecebeLance(clienteInteressado1, 100);
-            leilao.RecebeLance(clienteInteressado2, 200);
-            leilao.RecebeLance(clienteInteressado1, 1000);
-            leilao.RecebeLance(clienteInteressado2, 950);
+            leilao.ReceberLance(clienteInteressado3, 1400);
+            leilao.ReceberLance(clienteInteressado1, 100);
+            leilao.ReceberLance(clienteInteressado2, 200);
+            leilao.ReceberLance(clienteInteressado1, 1000);
+            leilao.ReceberLance(clienteInteressado2, 950);
 
             //Act
-            leilao.TerminaPregao();
+            leilao.TerminarPregao();
 
             //Assert
             var valorObtido = leilao.Ganhador.Valor;
