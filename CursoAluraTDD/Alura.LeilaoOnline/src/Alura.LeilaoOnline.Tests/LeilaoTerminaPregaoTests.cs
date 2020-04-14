@@ -29,13 +29,21 @@ namespace Alura.LeilaoOnline.Tests
             //Arrange
             var leilao = new Leilao("peca leiloada");
 
-            var clienteInteressado = new Interessada("cliente interessado", leilao);
+            var clienteInteressado1 = new Interessada("cliente 1", leilao);
+            var clienteInteressado2 = new Interessada("cliente 2", leilao);
 
             leilao.IniciaPregao();
 
-            foreach (var valor in lances)
+            for (int i =0; i < lances.Length; i++)
             {
-                leilao.RecebeLance(clienteInteressado, valor);
+                if(i%2 == 0)
+                {
+                    leilao.RecebeLance(clienteInteressado1, lances[i]);
+                }
+                else
+                {
+                    leilao.RecebeLance(clienteInteressado2, lances[i]);
+                }
             }
             
             //Act

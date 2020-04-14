@@ -27,32 +27,28 @@ namespace Alura.LeilaoOnline.Tests
             Assert.Equal(esperado, resultado);
         }
 
-        [Theory]
-        [InlineData(1, new double[] { 100 })]
-        [InlineData(2, new double[] { 100, 200 })]
-        [InlineData(4, new double[] { 100, 1200, 1000, 1400 })]
-        public void NaoPermiteNovosLancesDadoLeilaoFinalizado(double valorEsperado, double[] lances)
+        [Fact]
+        public void NaoPermiteNovosLancesDadoLeilaoFinalizado()
         {
             //Arrange
             var leilao = new Leilao("peça leiloada");
 
-            var clienteInteressado = new Interessada("pessoa interessada 1", leilao);
+            var clienteInteressado1 = new Interessada("pessoa interessada 1", leilao);
+            var clienteInteressado2 = new Interessada("pessoa interessada 2", leilao);
 
             leilao.IniciaPregao();
-            
-            foreach (var valor in lances)
-            {
-                leilao.RecebeLance(clienteInteressado, valor);
-            }
+
+            leilao.RecebeLance(clienteInteressado1, 100);
+            leilao.RecebeLance(clienteInteressado2, 200);
 
             leilao.TerminaPregao();
 
             //Act
-            leilao.RecebeLance(clienteInteressado, 1000);
+            leilao.RecebeLance(clienteInteressado1, 300);
 
             //Assert
             var valorObtido = leilao.Lances.Count();
-            Assert.Equal(valorEsperado, valorObtido);
+            Assert.Equal(2, valorObtido);
         }
 
         [Theory]
@@ -65,12 +61,18 @@ namespace Alura.LeilaoOnline.Tests
             //Arrange
             var leilao = new Leilao("peça leiloada");
 
-            var clienteInteressado = new Interessada("pessoa interessada 1", leilao);
-
+            var clienteInteressado1 = new Interessada("pessoa interessada 1", leilao);
+            var clienteInteressado2 = new Interessada("pessoa interessada 2", leilao);
+            
             //Act
-            foreach (var valor in lances)
+            for (int i = 0; i < lances.Length; i++)
             {
-                leilao.RecebeLance(clienteInteressado, valor);
+                var valor = lances[i];
+
+                if (i % 2 == 0)
+                    leilao.RecebeLance(clienteInteressado1, valor);
+
+                leilao.RecebeLance(clienteInteressado2, valor);
             }
 
             //Assert
