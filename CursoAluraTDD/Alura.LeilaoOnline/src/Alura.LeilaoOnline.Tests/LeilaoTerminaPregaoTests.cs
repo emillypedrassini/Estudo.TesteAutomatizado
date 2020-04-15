@@ -1,11 +1,25 @@
 ﻿using Alura.LeilaoOnline.Core;
 using Alura.LeilaoOnline.Core.Entities;
+using System;
 using Xunit;
 
 namespace Alura.LeilaoOnline.Tests
 {
     public class LeilaoTerminaPregaoTests
     {
+        [Fact]
+        public void LancaExceptionDadoPregaoNaoIniciado()
+        {
+            //Arrange
+            var leilao = new Leilao("peça leiloada");
+
+            //Assert
+            Assert.Throws<InvalidOperationException>(
+                //Act
+                () => leilao.TerminarPregao()
+            );
+        }
+
         [Fact]
         public void RetornaZeroDadoLeilaoSemLances()
         {
@@ -16,8 +30,9 @@ namespace Alura.LeilaoOnline.Tests
             leilao.TerminarPregao();
 
             //Assert
-            var valorObtido = leilao.Ganhador.Valor;
-            Assert.Equal(0, valorObtido);
+            var esperado = 0;
+            var resultado = leilao.Ganhador.Valor;
+            Assert.Equal(esperado, resultado);
         }
 
         [Theory]
@@ -50,8 +65,8 @@ namespace Alura.LeilaoOnline.Tests
             leilao.TerminarPregao();
 
             //Assert
-            var valorObtido = leilao.Ganhador.Valor;
-            Assert.Equal(valorEsperado, valorObtido);
+            var resultado = leilao.Ganhador.Valor;
+            Assert.Equal(valorEsperado, resultado);
         }
         
         [Theory]
@@ -77,8 +92,8 @@ namespace Alura.LeilaoOnline.Tests
             leilao.TerminarPregao();
 
             //Assert
-            var valorObtido = leilao.Ganhador.Valor;
-            Assert.Equal(valorEsperado, valorObtido);
+            var resultado = leilao.Ganhador.Valor;
+            Assert.Equal(valorEsperado, resultado);
             Assert.Equal(clienteInteressado3, leilao.Ganhador.Cliente);
         }
     }
