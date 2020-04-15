@@ -13,11 +13,15 @@ namespace Alura.LeilaoOnline.Tests
             //Arrange
             var leilao = new Leilao("peça leiloada");
 
-            //Assert
-            Assert.Throws<InvalidOperationException>(
+            
+            var resultado = Assert.Throws<InvalidOperationException>(
                 //Act
                 () => leilao.TerminarPregao()
             );
+
+            //Assert
+            var esperado = "Não é possível terminar o leilão sem ter iniciado.";
+            Assert.Equal(esperado, resultado.Message);
         }
 
         [Fact]

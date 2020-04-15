@@ -38,7 +38,7 @@ namespace Alura.LeilaoOnline.Core.Entities
 
         public void TerminarPregao()
         {
-            if(Estado != EstadoLeilao.EmAndamento) throw new InvalidOperationException();
+            if(Estado != EstadoLeilao.EmAndamento) throw new InvalidOperationException("Não é possível terminar o leilão sem ter iniciado.");
 
             Ganhador = Lances
                 .DefaultIfEmpty(new Lance(null, 0))
