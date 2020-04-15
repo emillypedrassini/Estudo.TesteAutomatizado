@@ -38,6 +38,8 @@ namespace Alura.LeilaoOnline.Core.Entities
 
         public void TerminarPregao()
         {
+            if(Estado != EstadoLeilao.EmAndamento) throw new InvalidOperationException();
+
             Ganhador = Lances
                 .DefaultIfEmpty(new Lance(null, 0))
                 .OrderBy(x => x.Valor)

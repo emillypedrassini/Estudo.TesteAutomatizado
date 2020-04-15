@@ -26,12 +26,15 @@ namespace Alura.LeilaoOnline.Tests
             //Arrange
             var leilao = new Leilao("peca leiloada");
 
+            leilao.IniciarPregao();
+
             //Act
             leilao.TerminarPregao();
 
             //Assert
             var esperado = 0;
             var resultado = leilao.Ganhador.Valor;
+
             Assert.Equal(esperado, resultado);
         }
 
