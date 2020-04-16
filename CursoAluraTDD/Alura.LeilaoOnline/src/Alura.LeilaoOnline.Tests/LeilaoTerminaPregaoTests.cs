@@ -7,21 +7,52 @@ namespace Alura.LeilaoOnline.Tests
 {
     public class LeilaoTerminaPregaoTests
     {
+        [Theory]
+        [InlineData(1200, 1250, new double[] { 800, 1150, 1400, 1250 })]
+        public void RetornarValorSuperiorMaisProximoDadoLeilaoNessaModalidade(double valorDestino, double valorEsperado, double[] lances)
+        {
+            //Arrange
+            var leilao = new Leilao("peca leiloada", valorDestino);
+
+            var clienteInteressado1 = new Interessada("cliente interessado 1", leilao);
+            var clienteInteressado2 = new Interessada("cliente interessado 2", leilao);
+
+            leilao.IniciarPregao();
+
+            for (int i = 0; i < lances.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    leilao.ReceberLance(clienteInteressado1, lances[i]);
+                }
+                else
+                {
+                    leilao.ReceberLance(clienteInteressado2, lances[i]);
+                }
+            }
+
+            //Act
+            leilao.TerminarPregao();
+
+            //Assert
+            var resultado = leilao.Ganhador.Valor;
+            Assert.Equal(valorEsperado, resultado);
+        }
+
         [Fact]
         public void LancaExceptionDadoPregaoNaoIniciado()
         {
             //Arrange
             var leilao = new Leilao("peça leiloada");
-
             
-            var resultado = Assert.Throws<InvalidOperationException>(
+            var excecaoCapturada = Assert.Throws<InvalidOperationException>(
                 //Act
                 () => leilao.TerminarPregao()
             );
 
             //Assert
             var esperado = "Não é possível terminar o leilão sem ter iniciado.";
-            Assert.Equal(esperado, resultado.Message);
+            Assert.Equal(esperado, excecaoCapturada.Message);
         }
 
         [Fact]
