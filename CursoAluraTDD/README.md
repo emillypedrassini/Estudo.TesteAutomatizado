@@ -1,38 +1,38 @@
 # Estudo.UnitTest
-# Na primeira aula, introduzimos testes automatizados, começamos fazendo um teste usando uma aplicação do tipo console, e vimos que ainda não é um teste automatizado.
-# 
-# Descobrimos isso a partir do padrão Arrange, Act e Assert. Esta última é a parte de verificação da expectativa que ainda estava por conta do desenvolvedor.
-# 
-# Conhecemos o framework xUnit onde criamos um novo projeto, e neste usamos suas classes para criar os testes. Identificamos cada método de teste com a anotação [Fact] e a parte de verificação da expectativa com Assert.
-# 
-# Para ver a execução dos testes, usamos uma nova janela do Visual Studio chamada "Gerenciador de Testes", onde encontramos a visualização destes, recebendo alertas do sistema de sucesso ou falha. Vimos que essa técnica nos retorna um rápido feedback sobre o funcionamento do código.
-# 
-# Já na segunda aula, começamos a pensar na criação de uma série de testes para confirmar a segurança do código. Porém, precisávamos saber uma quantidade ideal de testes para termos certeza dessa segurança.
-# 
-# Conhecemos as classes de equivalência que nos ajudaram a entender a prioridade de um teste por classe, ou seja, quando temos a mesma expectativa para condições de entrada diferentes. Vimos os padrões Given, When e Then, parecidos com as três partes do padrão anterior para resumir o cenário a um teste apenas.
-# 
-# O objetivo do testador é justamente achar essas classes de equivalência para o sistema. Para ajudar a reproduzir cenários com várias condições de entrada para a mesma expectativa de saída, temos as anotações [Theory] e [InlineData].
-# 
-# Continuando na questão de organização dos testes, falamos sobre nomenclatura e como nomeá-los de forma a tornar claro sua função. O primeiro critério é a consistência, usando as mesmas regras para todo o trabalho. Outra questão é a comunicação clara do uso do padrão AAA, contendo o cenário, o que está sendo testado e quais são os objetivos.
-# 
-# Depois, passamos para a terceira aula onde implementamos uma nova funcionalidade e nos deparamos com o fato desta quebrar o sistema, ou seja, regrediu. Para evitar isso, executamos uma suíte de testes que servem como testes de regressão.
-# 
-# Porém, uma dúvida surgiu acerca da disciplina sobre a garantia da criação de verificações a cada nova funcionalidade implementada. Nisso, conhecemos a prática do Test Driven Development ou TDD; um fluxo de desenvolvimento começando com o teste para a funcionalidade, para somente depois implementá-la efetivamente, sendo contraintuitivo em um primeiro momento.
-# 
-# O Ciclo TDD é composto por teste*, *correção e refatoração, ou seja, propõe escrever o teste primeiro, para depois corrigir sua falha devida à ausência do código de produção alertado pelo Gerenciador, fazendo com que sua execução seja bem sucedida. Por fim, ficamos livres para refatorar o código, deixando-o mais limpo e eficiente.
-# 
-# Na quarta aula, vimos que nosso sistema e os sistemas em geral comunicam exceções. Testamos com o método Throws<> pertencente à classe Assert, onde verificamos se determinado método testado lança a exceção a partir de uma condição de entrada.
-# 
-# Qualquer comportamento deve ser traduzido em verificações, inclusive as exceções. Depois, quando olhamos para a suíte de testes, vimos que ajuda a documentar o comportamento do sistema.
-# 
-# Por fim, a última aula abordou uma situação inédita; determinada funcionalidade exigia um redesign das classes, repensando a interação entre elementos e a interface das classes.
-# 
-# Vimos que poderíamos usar o próprio teste para repensar o design. No cenário, injetamos um código que nem mesmo compilava em um primeiro momento, mas auxiliava nessa reelaboração. Neste sentido, o teste também ajuda a melhorar o código.
-# 
-# Alguns autores inclusive dizem que o TDD é sigla para Test Driven Design, pois o design é orientado pelos testes escritos.
-# 
-# Portanto, esperamos que tenha sido de grande utilidade para a nova competência de testador.
+Na primeira aula, introduzimos testes automatizados, comeÃ§amos fazendo um teste usando uma aplicaÃ§Ã£o do tipo console, e vimos que ainda nÃ£o Ã© um teste automatizado.
 
-#Referencias 
-# https://docs.google.com/document/d/1Dy9cT4W7DYg3P-zlvrCaUwTOIXGnQUk7UXKktaqVpkQ/edit
+Descobrimos isso a partir do padrÃ£o Arrange, Act e Assert. Esta Ãºltima Ã© a parte de verificaÃ§Ã£o da expectativa que ainda estava por conta do desenvolvedor.
+
+Conhecemos o framework xUnit onde criamos um novo projeto, e neste usamos suas classes para criar os testes. Identificamos cada mÃ©todo de teste com a anotaÃ§Ã£o [Fact] e a parte de verificaÃ§Ã£o da expectativa com Assert.
+ 
+Para ver a execuÃ§Ã£o dos testes, usamos uma nova janela do Visual Studio chamada "Gerenciador de Testes", onde encontramos a visualizaÃ§Ã£o destes, recebendo alertas do sistema de sucesso ou falha. Vimos que essa tÃ©cnica nos retorna um rÃ¡pido feedback sobre o funcionamento do cÃ³digo.
+
+JÃ¡ na segunda aula, comeÃ§amos a pensar na criaÃ§Ã£o de uma sÃ©rie de testes para confirmar a seguranÃ§a do cÃ³digo. PorÃ©m, precisÃ¡vamos saber uma quantidade ideal de testes para termos certeza dessa seguranÃ§a.
+ 
+Conhecemos as classes de equivalÃªncia que nos ajudaram a entender a prioridade de um teste por classe, ou seja, quando temos a mesma expectativa para condiÃ§Ãµes de entrada diferentes. Vimos os padrÃµes Given, When e Then, parecidos com as trÃªs partes do padrÃ£o anterior para resumir o cenÃ¡rio a um teste apenas.
+
+O objetivo do testador Ã© justamente achar essas classes de equivalÃªncia para o sistema. Para ajudar a reproduzir cenÃ¡rios com vÃ¡rias condiÃ§Ãµes de entrada para a mesma expectativa de saÃ­da, temos as anotaÃ§Ãµes [Theory] e [InlineData].
+ 
+Continuando na questÃ£o de organizaÃ§Ã£o dos testes, falamos sobre nomenclatura e como nomeÃ¡-los de forma a tornar claro sua funÃ§Ã£o. O primeiro critÃ©rio Ã© a consistÃªncia, usando as mesmas regras para todo o trabalho. Outra questÃ£o Ã© a comunicaÃ§Ã£o clara do uso do padrÃ£o AAA, contendo o cenÃ¡rio, o que estÃ¡ sendo testado e quais sÃ£o os objetivos.
+
+Depois, passamos para a terceira aula onde implementamos uma nova funcionalidade e nos deparamos com o fato desta quebrar o sistema, ou seja, regrediu. Para evitar isso, executamos uma suÃ­te de testes que servem como testes de regressÃ£o.
+
+PorÃ©m, uma dÃºvida surgiu acerca da disciplina sobre a garantia da criaÃ§Ã£o de verificaÃ§Ãµes a cada nova funcionalidade implementada. Nisso, conhecemos a prÃ¡tica do Test Driven Development ou TDD; um fluxo de desenvolvimento comeÃ§ando com o teste para a funcionalidade, para somente depois implementÃ¡-la efetivamente, sendo contraintuitivo em um primeiro momento.
+
+O Ciclo TDD Ã© composto por teste*, *correÃ§Ã£o e refatoraÃ§Ã£o, ou seja, propÃµe escrever o teste primeiro, para depois corrigir sua falha devida Ã  ausÃªncia do cÃ³digo de produÃ§Ã£o alertado pelo Gerenciador, fazendo com que sua execuÃ§Ã£o seja bem sucedida. Por fim, ficamos livres para refatorar o cÃ³digo, deixando-o mais limpo e eficiente.
+
+Na quarta aula, vimos que nosso sistema e os sistemas em geral comunicam exceÃ§Ãµes. Testamos com o mÃ©todo Throws<> pertencente Ã  classe Assert, onde verificamos se determinado mÃ©todo testado lanÃ§a a exceÃ§Ã£o a partir de uma condiÃ§Ã£o de entrada.
+
+Qualquer comportamento deve ser traduzido em verificaÃ§Ãµes, inclusive as exceÃ§Ãµes. Depois, quando olhamos para a suÃ­te de testes, vimos que ajuda a documentar o comportamento do sistema.
+
+Por fim, a Ãºltima aula abordou uma situaÃ§Ã£o inÃ©dita; determinada funcionalidade exigia um redesign das classes, repensando a interaÃ§Ã£o entre elementos e a interface das classes.
+
+Vimos que poderÃ­amos usar o prÃ³prio teste para repensar o design. No cenÃ¡rio, injetamos um cÃ³digo que nem mesmo compilava em um primeiro momento, mas auxiliava nessa reelaboraÃ§Ã£o. Neste sentido, o teste tambÃ©m ajuda a melhorar o cÃ³digo.
+ 
+Alguns autores inclusive dizem que o TDD Ã© sigla para Test Driven Design, pois o design Ã© orientado pelos testes escritos.
+
+Portanto, esperamos que tenha sido de grande utilidade para a nova competÃªncia de testador.
+
+# Referencias
+ https://docs.google.com/document/d/1Dy9cT4W7DYg3P-zlvrCaUwTOIXGnQUk7UXKktaqVpkQ/edit
   
