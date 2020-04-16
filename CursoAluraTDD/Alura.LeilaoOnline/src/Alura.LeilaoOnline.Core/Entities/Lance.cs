@@ -11,6 +11,8 @@ namespace Alura.LeilaoOnline.Core.Entities
 
         public Lance(Interessada cliente, double valor)
         {
+            if (valor < 0) throw new ArgumentException("Valor do Lance não pode ser negativo");
+
             Cliente = cliente;
             Valor = valor;
         }
