@@ -9,26 +9,34 @@ namespace Alura.LeilaoOnline.Core.Entities
     public class Leilao
     {
         private IList<Lance> _lances;
+
         public IEnumerable<Lance> Lances => _lances;
+
         public string Peca { get; }
+
         public Lance Ganhador { get; private set; }
+
         public EstadoLeilao Estado { get; private set; }
-        public Interessada _ultimoCliente { get; private set; }
 
-        public Leilao(string peca)
+        public Interessada UltimoCliente { get; private set; }
+
+        public double ValorDestino { get; }
+
+        public Modalidade Modalidade { get; }
+
+
+        public Leilao(string peca, double valorDestino = 0)
         {
-            Peca = peca;
+            Estado = EstadoLeilao.NaoIniciado;
+            Modalidade = Modalidade.Tradicional;
+
             _lances = new List<Lance>();
-            Estado = EstadoLeilao.AntesDoPregao;
-        }
 
-        public void ReceberLance(Interessada cliente, double valor)
-        {
-            if (LanceValido(cliente))
-            {
-                _lances.Add(new Lance(cliente, valor));
-                _ultimoCliente = cliente;
-            }
+            Peca = peca;
+
+            ValorDestino = valorDestino;
+
+            if (valorDestino > 0) Modalidade = Modalidade.OfertaSuperiorMaisProxima;
         }
 
         public void IniciarPregao()
@@ -36,22 +44,48 @@ namespace Alura.LeilaoOnline.Core.Entities
             Estado = EstadoLeilao.EmAndamento;
         }
 
+        public void ReceberLance(Interessada cliente, double valor)
+        {
+            if (LanceValido(cliente))
+            {
+                _lances.Add(new Lance(cliente, valor));
+                UltimoCliente = cliente;
+            }
+        }
+
         public void TerminarPregao()
         {
-            if(Estado != EstadoLeilao.EmAndamento) throw new InvalidOperationException("Não é possível terminar o leilão sem ter iniciado.");
-
-            Ganhador = Lances
-                .DefaultIfEmpty(new Lance(null, 0))
-                .OrderBy(x => x.Valor)
-                .LastOrDefault();
+            if (Estado != EstadoLeilao.EmAndamento) throw new InvalidOperationException("Não é possível terminar o leilão sem ter iniciado.");
+            
+            DefinirGanhador();
 
             Estado = EstadoLeilao.Finalizado;
         }
-    
+
+        private void DefinirGanhador()
+        {
+            if (Modalidade == Modalidade.OfertaSuperiorMaisProxima)
+            {
+                Ganhador = Lances
+                    .DefaultIfEmpty(new Lance(null, 0))
+                    .Where(x => x.Valor > ValorDestino)
+                    .OrderBy(x => x.Valor)
+                    .FirstOrDefault();
+            }
+
+            if (Modalidade == Modalidade.Tradicional)
+            {
+                Ganhador = Lances
+                    .DefaultIfEmpty(new Lance(null, 0))
+                    .OrderBy(x => x.Valor)
+                    .LastOrDefault();
+            }            
+        }
+
         private bool LanceValido(Interessada cliente)
         {
             return (Estado == EstadoLeilao.EmAndamento)
-                    && (cliente != _ultimoCliente);
+                    && (cliente != UltimoCliente);
         }
     }
 }
