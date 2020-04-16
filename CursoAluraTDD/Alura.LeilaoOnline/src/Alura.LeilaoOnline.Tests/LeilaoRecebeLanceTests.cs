@@ -81,7 +81,7 @@ namespace Alura.LeilaoOnline.Tests
             }
 
             //Assert
-            Assert.Equal(0, leilao.Lances.Count());
+            Assert.Empty(leilao.Lances);
         }
     }
 }

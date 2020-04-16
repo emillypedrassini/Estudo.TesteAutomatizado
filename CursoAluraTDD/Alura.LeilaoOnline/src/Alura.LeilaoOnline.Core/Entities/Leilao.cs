@@ -52,8 +52,7 @@ namespace Alura.LeilaoOnline.Core.Entities
 
         private bool LanceValido(Interessada cliente)
         {
-            return (Estado == EstadoLeilao.EmAndamento)
-                    && (cliente != _ultimoCliente);
+            return (Estado == EstadoLeilao.EmAndamento) && (cliente != _ultimoCliente);
         }
     }
 }
