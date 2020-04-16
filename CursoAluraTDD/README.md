@@ -33,6 +33,6 @@ Alguns autores inclusive dizem que o TDD é sigla para Test Driven Design, pois 
 
 Portanto, esperamos que tenha sido de grande utilidade para a nova competência de testador.
 
-# Referencias
+# Referências
  https://docs.google.com/document/d/1Dy9cT4W7DYg3P-zlvrCaUwTOIXGnQUk7UXKktaqVpkQ/edit
   
