@@ -1,5 +1,7 @@
 ﻿using Alura.LeilaoOnline.Core;
+using Alura.LeilaoOnline.Core.Class;
 using Alura.LeilaoOnline.Core.Entities;
+using Alura.LeilaoOnline.Core.Interface;
 using System.Linq;
 using Xunit;
 
@@ -11,7 +13,8 @@ namespace Alura.LeilaoOnline.Tests
         public void NaoAceitaProximoLanceDadoSejaDoMesmoInteressado()
         {
             //Arrange
-            var leilao = new Leilao("peça leiloada");
+            IModalidadeLeilao modalidadeLeilao = new ModalidadeOfertaMaiorValor();
+            var leilao = new Leilao("peça leiloada", modalidadeLeilao);
             var interessado = new Interessada("pessoa interessada 1", leilao);
 
             leilao.IniciarPregao();
@@ -31,7 +34,8 @@ namespace Alura.LeilaoOnline.Tests
         public void NaoPermiteNovosLancesDadoLeilaoFinalizado()
         {
             //Arrange
-            var leilao = new Leilao("peça leiloada");
+            IModalidadeLeilao modalidadeLeilao = new ModalidadeOfertaMaiorValor();
+            var leilao = new Leilao("peça leiloada", modalidadeLeilao);
 
             var clienteInteressado1 = new Interessada("pessoa interessada 1", leilao);
             var clienteInteressado2 = new Interessada("pessoa interessada 2", leilao);
@@ -59,7 +63,8 @@ namespace Alura.LeilaoOnline.Tests
         public void QuantidadeDeLancesPermaneceZeroDadoQuePregaoNaoFoiIniciado(double[] lances)
         {
             //Arrange
-            var leilao = new Leilao("peça leiloada");
+            IModalidadeLeilao modalidadeLeilao = new ModalidadeOfertaMaiorValor();
+            var leilao = new Leilao("peça leiloada", modalidadeLeilao);
 
             var clienteInteressado1 = new Interessada("pessoa interessada 1", leilao);
             var clienteInteressado2 = new Interessada("pessoa interessada 2", leilao);

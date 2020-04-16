@@ -1,42 +1,30 @@
-﻿using Alura.LeilaoOnline.Core.Enum;
+﻿using Alura.LeilaoOnline.Core.Class;
+using Alura.LeilaoOnline.Core.Enum;
+using Alura.LeilaoOnline.Core.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Alura.LeilaoOnline.Core.Entities
 {
     public class Leilao
     {
-        private IList<Lance> _lances;
-
         public IEnumerable<Lance> Lances => _lances;
-
         public string Peca { get; }
-
         public Lance Ganhador { get; private set; }
-
         public EstadoLeilao Estado { get; private set; }
 
+        private IList<Lance> _lances;
         public Interessada UltimoCliente { get; private set; }
+        private IModalidadeLeilao _modalidadeLeilao;
 
-        public double ValorDestino { get; }
-
-        public Modalidade Modalidade { get; }
-
-
-        public Leilao(string peca, double valorDestino = 0)
+        public Leilao(string peca, IModalidadeLeilao modalidadeLeilao)
         {
-            Estado = EstadoLeilao.NaoIniciado;
-            Modalidade = Modalidade.Tradicional;
-
             _lances = new List<Lance>();
+            _modalidadeLeilao = modalidadeLeilao;
 
             Peca = peca;
-
-            ValorDestino = valorDestino;
-
-            if (valorDestino > 0) Modalidade = Modalidade.OfertaSuperiorMaisProxima;
+            Estado = EstadoLeilao.NaoIniciado;
         }
 
         public void IniciarPregao()
@@ -56,30 +44,10 @@ namespace Alura.LeilaoOnline.Core.Entities
         public void TerminarPregao()
         {
             if (Estado != EstadoLeilao.EmAndamento) throw new InvalidOperationException("Não é possível terminar o leilão sem ter iniciado.");
-            
-            DefinirGanhador();
+
+            Ganhador = _modalidadeLeilao.DefinirGanhador(this);
 
             Estado = EstadoLeilao.Finalizado;
-        }
-
-        private void DefinirGanhador()
-        {
-            if (Modalidade == Modalidade.OfertaSuperiorMaisProxima)
-            {
-                Ganhador = Lances
-                    .DefaultIfEmpty(new Lance(null, 0))
-                    .Where(x => x.Valor > ValorDestino)
-                    .OrderBy(x => x.Valor)
-                    .FirstOrDefault();
-            }
-
-            if (Modalidade == Modalidade.Tradicional)
-            {
-                Ganhador = Lances
-                    .DefaultIfEmpty(new Lance(null, 0))
-                    .OrderBy(x => x.Valor)
-                    .LastOrDefault();
-            }            
         }
 
         private bool LanceValido(Interessada cliente)

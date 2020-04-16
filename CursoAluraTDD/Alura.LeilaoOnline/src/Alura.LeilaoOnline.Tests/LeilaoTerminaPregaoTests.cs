@@ -1,5 +1,7 @@
 ﻿using Alura.LeilaoOnline.Core;
+using Alura.LeilaoOnline.Core.Class;
 using Alura.LeilaoOnline.Core.Entities;
+using Alura.LeilaoOnline.Core.Interface;
 using System;
 using Xunit;
 
@@ -12,7 +14,9 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornarValorSuperiorMaisProximoDadoLeilaoNessaModalidade(double valorDestino, double valorEsperado, double[] lances)
         {
             //Arrange
-            var leilao = new Leilao("peca leiloada", valorDestino);
+            IModalidadeLeilao modalidadeLeilao = new ModalidadeOfertaSuperiorMaisProxima(valorDestino);
+
+            var leilao = new Leilao("peca leiloada", modalidadeLeilao);
 
             var clienteInteressado1 = new Interessada("cliente interessado 1", leilao);
             var clienteInteressado2 = new Interessada("cliente interessado 2", leilao);
@@ -43,8 +47,10 @@ namespace Alura.LeilaoOnline.Tests
         public void LancaExceptionDadoPregaoNaoIniciado()
         {
             //Arrange
-            var leilao = new Leilao("peça leiloada");
-            
+            IModalidadeLeilao modalidadeLeilao = new ModalidadeOfertaMaiorValor();
+            var leilao = new Leilao("peça leiloada", modalidadeLeilao);
+
+            //Assert
             var excecaoCapturada = Assert.Throws<InvalidOperationException>(
                 //Act
                 () => leilao.TerminarPregao()
@@ -59,7 +65,8 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornaZeroDadoLeilaoSemLances()
         {
             //Arrange
-            var leilao = new Leilao("peca leiloada");
+            IModalidadeLeilao modalidadeLeilao = new ModalidadeOfertaMaiorValor();
+            var leilao = new Leilao("peça leiloada", modalidadeLeilao);
 
             leilao.IniciarPregao();
 
@@ -80,7 +87,8 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornaMaiorValorDadoLeilaoComPeloMenosUmLance(double valorEsperado, double[] lances)
         {
             //Arrange
-            var leilao = new Leilao("peca leiloada");
+            IModalidadeLeilao modalidadeLeilao = new ModalidadeOfertaMaiorValor();
+            var leilao = new Leilao("peça leiloada", modalidadeLeilao);
 
             var clienteInteressado1 = new Interessada("cliente 1", leilao);
             var clienteInteressado2 = new Interessada("cliente 2", leilao);
@@ -112,7 +120,8 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornaMaiorValorDadoLeilaoComPeloMenosUmLanceE3Clientes(double valorEsperado)
         {
             //Arrange
-            var leilao = new Leilao("peca leiloada");
+            IModalidadeLeilao modalidadeLeilao = new ModalidadeOfertaMaiorValor();
+            var leilao = new Leilao("peça leiloada", modalidadeLeilao);
 
             var clienteInteressado1 = new Interessada("cliente interessado 1", leilao);
             var clienteInteressado2 = new Interessada("cliente interessado 2", leilao);
