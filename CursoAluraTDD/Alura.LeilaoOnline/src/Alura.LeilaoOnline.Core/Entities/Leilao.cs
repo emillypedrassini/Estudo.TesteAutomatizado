@@ -15,7 +15,7 @@ namespace Alura.LeilaoOnline.Core.Entities
         public EstadoLeilao Estado { get; private set; }
 
         private IList<Lance> _lances;
-        public Interessada UltimoCliente { get; private set; }
+        private Interessada _ultimoCliente;
         private IModalidadeLeilao _modalidadeLeilao;
 
         public Leilao(string peca, IModalidadeLeilao modalidadeLeilao)
@@ -37,7 +37,7 @@ namespace Alura.LeilaoOnline.Core.Entities
             if (LanceValido(cliente))
             {
                 _lances.Add(new Lance(cliente, valor));
-                UltimoCliente = cliente;
+                _ultimoCliente = cliente;
             }
         }
 
@@ -53,7 +53,7 @@ namespace Alura.LeilaoOnline.Core.Entities
         private bool LanceValido(Interessada cliente)
         {
             return (Estado == EstadoLeilao.EmAndamento)
-                    && (cliente != UltimoCliente);
+                    && (cliente != _ultimoCliente);
         }
     }
 }
